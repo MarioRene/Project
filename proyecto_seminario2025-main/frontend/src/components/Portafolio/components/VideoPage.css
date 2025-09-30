@@ -1,0 +1,480 @@
+/* 🎬 REPRODUCTOR MODERNO MINIMALISTA */
+
+.video-page {
+  background: linear-gradient(135deg, #000000 0%, #0a0a0a 100%);
+  color: white;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de ambiente sutil */
+.video-page::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle at 30% 20%, 
+    rgba(220, 38, 127, 0.03) 0%, 
+    transparent 50%
+  );
+  animation: subtlePulse 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes subtlePulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* Header minimalista */
+.video-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, transparent 100%);
+  padding: 30px 40px;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.video-header.hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.video-header.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.video-meta {
+  flex: 1;
+}
+
+.video-main-title {
+  font-size: 28px;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+  font-family: 'Inter', sans-serif;
+}
+
+.video-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.detail-value {
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.detail-separator {
+  color: rgba(220, 38, 127, 0.6);
+  font-weight: bold;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* Container del reproductor */
+.video-wrapper {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.video-container-main {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  max-height: 85vh;
+}
+
+/* Reproductor principal */
+.video-player {
+  width: 100%;
+  height: auto;
+  max-height: 85vh;
+  background: #000;
+  border-radius: 16px;
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.video-player:hover {
+  box-shadow: 
+    0 50px 120px rgba(0, 0, 0, 0.9),
+    0 0 60px rgba(220, 38, 127, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+/* Controles minimalistas */
+.custom-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+  padding: 30px 25px 25px;
+  border-radius: 0 0 16px 16px;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(20px);
+}
+
+.custom-controls.hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.custom-controls.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Barra de progreso elegante */
+.progress-container {
+  margin-bottom: 20px;
+  cursor: pointer;
+  padding: 8px 0;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #dc267f 0%, #ff4500 100%);
+  border-radius: 2px;
+  transition: width 0.1s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -10px;
+  width: 10px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(220, 38, 127, 0.6);
+}
+
+/* Fila de controles */
+.controls-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.controls-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.control-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.play-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.play-btn:hover {
+  background: rgba(220, 38, 127, 0.2);
+  border-color: rgba(220, 38, 127, 0.4);
+}
+
+/* Display de tiempo moderno */
+.time-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'SF Mono', 'Monaco', 'Cascadia Code', monospace;
+}
+
+.time-separator {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Control de volumen elegante */
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.volume-slider {
+  width: 70px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  transition: all 0.2s ease;
+}
+
+.volume-slider:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: all 0.2s ease;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.2);
+  background: #dc267f;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Mensaje de error moderno */
+.error-message {
+  text-align: center;
+  color: #ffffff;
+  padding: 60px 40px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.error-message h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 16px;
+  color: #ffffff;
+  letter-spacing: 1px;
+}
+
+.error-message p {
+  font-size: 16px;
+  margin-bottom: 32px;
+  opacity: 0.7;
+  line-height: 1.5;
+  font-weight: 300;
+}
+
+.error-button {
+  background: linear-gradient(135deg, rgba(220, 38, 127, 0.8), rgba(255, 69, 0, 0.6));
+  border: none;
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.5px;
+}
+
+.error-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px rgba(220, 38, 127, 0.3);
+  background: linear-gradient(135deg, #dc267f, #ff4500);
+}
+
+/* Animación de entrada */
+@keyframes pageLoad {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.video-page {
+  animation: pageLoad 0.8s ease-out;
+}
+
+/* Responsividad */
+@media (max-width: 1024px) {
+  .video-container-main {
+    width: 95%;
+  }
+  
+  .video-header {
+    padding: 25px 30px;
+  }
+  
+  .video-main-title {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .exit-button {
+    top: 20px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+  }
+  
+  .exit-button::after {
+    display: none;
+  }
+  
+  .video-header {
+    padding: 20px 20px;
+    padding-right: 80px;
+  }
+  
+  .video-main-title {
+    font-size: 20px;
+  }
+  
+  .video-details {
+    font-size: 12px;
+  }
+  
+  .custom-controls {
+    padding: 20px 20px 20px;
+  }
+  
+  .controls-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .volume-control {
+    display: none;
+  }
+  
+  .time-display {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .exit-button {
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .video-header {
+    padding-right: 70px;
+  }
+  
+  .video-container-main {
+    width: 98%;
+  }
+  
+  .video-player {
+    border-radius: 12px;
+  }
+  
+  .custom-controls {
+    border-radius: 0 0 12px 12px;
+    padding: 15px;
+  }
+  
+  .controls-left {
+    gap: 15px;
+  }
+  
+  .error-message {
+    padding: 40px 20px;
+  }
+  
+  .error-message h2 {
+    font-size: 24px;
+  }
+}

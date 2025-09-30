@@ -1,0 +1,703 @@
+/* 🎬 GALERÍA DE VIDEOS - DISEÑO MODERNO MINIMALISTA */
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 40px;
+  padding: 120px 50px 80px;
+  background: linear-gradient(135deg, #000000 0%, #0d0d0d 25%, #1a1a1a 50%, #000000 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Efecto de rejilla sutil */
+.gallery-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  animation: gridShift 20s ease-in-out infinite;
+}
+
+@keyframes gridShift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(25px, 25px); }
+}
+
+/* 🎭 Tarjeta con diseño moderno */
+.video-card {
+  background: linear-gradient(145deg, #111111, #000000);
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(220, 38, 127, 0.02) 0%, 
+    transparent 50%, 
+    rgba(255, 69, 0, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.video-card:hover {
+  transform: translateY(-20px) scale(1.02);
+  box-shadow: 
+    0 40px 80px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(220, 38, 127, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-color: rgba(220, 38, 127, 0.2);
+}
+
+.video-card:hover::before {
+  opacity: 1;
+}
+
+/* 🎥 Container del video */
+.video-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px 20px 0 0;
+  height: 300px;
+}
+
+.video-card video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000;
+  transition: all 0.5s ease;
+  z-index: 2;
+}
+
+.video-card:hover video {
+  transform: scale(1.08);
+  filter: brightness(1.2) contrast(1.1) saturate(1.2);
+}
+
+/* Overlay más elegante */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0,0,0,0.1) 0%,
+    rgba(220, 38, 127, 0.1) 50%,
+    rgba(0,0,0,0.3) 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 5;
+  backdrop-filter: blur(2px);
+}
+
+.video-card:hover .video-overlay {
+  opacity: 1;
+}
+
+.play-button {
+  transform: scale(0.7);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  filter: drop-shadow(0 8px 32px rgba(0, 0, 0, 0.6));
+}
+
+.video-card:hover .play-button {
+  transform: scale(1);
+}
+
+.play-button svg {
+  transition: all 0.3s ease;
+}
+
+.play-button:hover svg {
+  transform: scale(1.1);
+}
+
+/* 🎪 Información moderna */
+.video-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #080808 100%);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  z-index: 4;
+}
+
+.video-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 28px;
+  right: 28px;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(220, 38, 127, 0.3),
+    rgba(255, 69, 0, 0.2), 
+    transparent);
+}
+
+/* Textos con tipografía moderna */
+.video-info .company {
+  text-align: left;
+  flex: 1;
+  font-size: 11px;
+  font-weight: 700;
+  color: #dc267f;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.video-info .title {
+  text-align: center;
+  flex: 2;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+}
+
+.video-info .director {
+  text-align: right;
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+/* Efectos hover en texto */
+.video-card:hover .video-info .company {
+  color: #ff4500;
+  transform: translateX(4px);
+}
+
+.video-card:hover .video-info .title {
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(220, 38, 127, 0.6);
+  transform: scale(1.02);
+}
+
+.video-card:hover .video-info .director {
+  color: #aaaaaa;
+  transform: translateX(-4px);
+}
+
+/* Elementos decorativos */
+.company-underline {
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #dc267f, #ff4500);
+  transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  margin-top: 4px;
+  border-radius: 1px;
+}
+
+.video-card:hover .company-underline {
+  width: 100%;
+}
+
+.director-accent {
+  width: 0;
+  height: 1px;
+  background: #666666;
+  margin-top: 4px;
+  transition: all 0.4s ease;
+  margin-left: auto;
+  border-radius: 1px;
+}
+
+.video-card:hover .director-accent {
+  width: 30px;
+  background: #aaaaaa;
+}
+
+/* Indicador de calidad moderno */
+.video-status {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 6;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.video-card:hover .video-status {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.status-dot {
+  width: 4px;
+  height: 4px;
+  background: #00ff88;
+  border-radius: 50%;
+  animation: statusBlink 2s ease-in-out infinite;
+}
+
+@keyframes statusBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Footer moderno */
+.gallery-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 60px;
+  padding: 40px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(135deg, rgba(17, 17, 17, 0.8), rgba(0, 0, 0, 0.6));
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+}
+
+.video-count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.count-number {
+  font-size: 48px;
+  font-weight: 300;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 30px rgba(220, 38, 127, 0.3);
+}
+
+.count-label {
+  font-size: 12px;
+  color: #666666;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.gallery-signature {
+  font-size: 14px;
+  color: #ffffff;
+  font-weight: 300;
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+/* Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.video-card {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Retraso escalonado */
+.video-card:nth-child(1) { animation-delay: 0.1s; }
+.video-card:nth-child(2) { animation-delay: 0.2s; }
+.video-card:nth-child(3) { animation-delay: 0.3s; }
+.video-card:nth-child(4) { animation-delay: 0.4s; }
+.video-card:nth-child(5) { animation-delay: 0.5s; }
+.video-card:nth-child(6) { animation-delay: 0.6s; }
+
+/* Responsividad moderna */
+@media (max-width: 1200px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    padding: 100px 30px 60px;
+  }
+  
+  .video-container {
+    height: 260px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 80px 20px 40px;
+  }
+  
+  .video-container {
+    height: 240px;
+  }
+  
+  .video-info {
+    padding: 20px 24px;
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+  
+  .video-info .company,
+  .video-info .title,
+  .video-info .director {
+    flex: none;
+  }
+  
+  .video-info .title {
+    font-size: 16px;
+    order: -1;
+  }
+  
+  .gallery-footer {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+  }
+  
+  .count-number {
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+    padding: 60px 15px 30px;
+    gap: 20px;
+  }
+  
+  .video-container {
+    height: 220px;
+  }
+  
+  .video-info {
+    padding: 16px 20px;
+  }
+  
+  .video-info .title {
+    font-size: 14px;
+  }
+  
+  .count-number {
+    font-size: 28px;
+  }
+}/* 🎬 GALERÍA DE VIDEOS - DISEÑO AUDIOVISUAL MODERNO */
+
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 30px;
+  padding: 120px 40px 80px;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%);
+  min-height: 100vh;
+  box-sizing: border-box;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Efecto de partículas de fondo */
+.gallery-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(220, 38, 127, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 69, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(139, 0, 0, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+  animation: particleFloat 20s ease-in-out infinite;
+}
+
+@keyframes particleFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-10px) rotate(1deg); }
+  66% { transform: translateY(5px) rotate(-1deg); }
+}
+
+/* 🎭 Tarjeta individual */
+.video-card {
+  background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+.video-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent, rgba(220, 38, 127, 0.1), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.video-card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(220, 38, 127, 0.2),
+    0 0 30px rgba(255, 69, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-color: rgba(220, 38, 127, 0.3);
+}
+
+.video-card:hover::before {
+  opacity: 1;
+}
+
+/* 🎥 Videos con overlay cinematográfico */
+.video-card video {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  background-color: #000;
+  transition: all 0.4s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.video-card:hover video {
+  transform: scale(1.05);
+  filter: brightness(1.1) contrast(1.1);
+}
+
+/* Overlay cinematográfico */
+.video-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 280px;
+  background: linear-gradient(
+    180deg, 
+    rgba(0,0,0,0) 0%, 
+    rgba(0,0,0,0.1) 40%, 
+    rgba(0,0,0,0.8) 100%
+  );
+  z-index: 3;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.video-card:hover::after {
+  opacity: 1;
+}
+
+/* 🎪 Información del video */
+.video-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%);
+  font-family: 'Arial', sans-serif;
+  position: relative;
+  z-index: 4;
+}
+
+.video-info::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 20px;
+  right: 20px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(220, 38, 127, 0.5), transparent);
+}
+
+/* 🎨 Estilos de texto con efectos */
+.video-info .company {
+  text-align: left;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: #dc267f;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.video-info .title {
+  text-align: center;
+  flex: 2;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.video-info .director {
+  text-align: right;
+  flex: 1;
+  font-size: 12px;
+  font-weight: 500;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Efectos hover en texto */
+.video-card:hover .video-info .company {
+  color: #ff4500;
+  transform: translateX(5px);
+}
+
+.video-card:hover .video-info .title {
+  color: #ffffff;
+  text-shadow: 0 0 15px rgba(220, 38, 127, 0.8);
+  transform: scale(1.05);
+}
+
+.video-card:hover .video-info .director {
+  color: #cccccc;
+  transform: translateX(-5px);
+}
+
+/* 📱 Responsividad cinematográfica */
+@media (max-width: 1200px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    padding: 100px 30px 60px;
+  }
+  
+  .video-card video {
+    height: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 80px 20px 40px;
+  }
+  
+  .video-card video {
+    height: 220px;
+  }
+  
+  .video-info {
+    padding: 15px;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .video-info .company,
+  .video-info .title,
+  .video-info .director {
+    text-align: center;
+    flex: none;
+  }
+  
+  .video-info .title {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+    padding: 60px 15px 30px;
+  }
+  
+  .video-card video {
+    height: 200px;
+  }
+}
+
+/* 🎬 Animación de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.video-card {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Retraso escalonado para las tarjetas */
+.video-card:nth-child(1) { animation-delay: 0.1s; }
+.video-card:nth-child(2) { animation-delay: 0.2s; }
+.video-card:nth-child(3) { animation-delay: 0.3s; }
+.video-card:nth-child(4) { animation-delay: 0.4s; }
+.video-card:nth-child(5) { animation-delay: 0.5s; }
+.video-card:nth-child(6) { animation-delay: 0.6s; }
